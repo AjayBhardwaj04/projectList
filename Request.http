@@ -3,4 +3,4 @@ GET localhost:8080/api/students/1
 
 
 ###
-GET localhost:8080/api/students
+GET localhost:8080

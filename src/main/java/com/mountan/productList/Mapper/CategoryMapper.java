@@ -1,15 +1,13 @@
 package com.mountan.productList.Mapper;
 
-import com.mountan.productList.DTO.categoriesDTO;
-import com.mountan.productList.Entity.category;
-import jdk.jfr.Category;
+import com.mountan.productList.DTO.CategoryDTO;
+import com.mountan.productList.Entity.Category;
 
-import java.util.Locale;
-
-public class categoriesMapper {
-    public static category toCategoryEntity(categoriesDTO categoriesDTO) {
-        category category = new category();
-        category.getName(categoriesDTO.getName());
+public class CategoryMapper {
+    public static Category toCategoryEntity(CategoryDTO categoryDTO){
+        Category category = new Category(); // "Category " this Category import from Entity Category
+        category.setName(categoryDTO.getName());
+        return category;
 
     }
 }

@@ -1,5 +1,8 @@
 package com.mountan.productList.Service;
 
-public class productService {
+import org.springframework.stereotype.Service;
+
+@Service
+public class ProductService {
 
 }
