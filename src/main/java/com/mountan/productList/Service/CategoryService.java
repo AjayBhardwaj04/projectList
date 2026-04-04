@@ -13,11 +13,10 @@ public class CategoryService {
     public CategoryDTO toCategoryDTO(CategoryDTO categoryDTO){
        Category category = CategoryMapper.toCategoryEntity(categoryDTO);
        category = categoryRepository.save(category);
-       return categoryDTO;
+      return CategoryMapper.toCategoryDTO(category);
 
 
     }
-
 
 
 }
