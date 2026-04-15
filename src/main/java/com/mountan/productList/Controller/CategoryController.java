@@ -3,6 +3,8 @@ package com.mountan.productList.Controller;
 import com.mountan.productList.DTO.CategoryDTO;
 import com.mountan.productList.Service.CategoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,8 @@ public class CategoryController {
 
 
     @PostMapping
-    public CategoryDTO createCategory(@RequestBody CategoryDTO categoryDTO){
-        return categoryService.toCategoryDTO(categoryDTO);
+    public ResponseEntity< CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO){
+        return new ResponseEntity<>( categoryService.CreateCategory(categoryDTO), HttpStatus.CREATED);
     }
 
 }
