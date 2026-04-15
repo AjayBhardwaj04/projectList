@@ -12,6 +12,7 @@ public class CategoryMapper {
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setId(category.getId());
         categoryDTO.setName(category.getName());
+//        categoryDTO.setProducts(category.getProducts().stream().map(ProductMapper::toProductDTO).toList());
         categoryDTO.setProducts(category.getProducts().stream().map(ProductMapper::toProductDTO).toList());
         return categoryDTO;
     }
