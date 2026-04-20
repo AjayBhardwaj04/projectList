@@ -29,7 +29,7 @@ public class ProductController {
 
 
     // CREATE PRODUCT MAPPING
-@PostMapping
+      @PostMapping
     public ResponseEntity<ProductDTO> createProducts(@RequestBody ProductDTO productDTO){
        ProductDTO createProduct = productService.createProduct(productDTO);
        return new ResponseEntity<>(createProduct,HttpStatus.CREATED);
