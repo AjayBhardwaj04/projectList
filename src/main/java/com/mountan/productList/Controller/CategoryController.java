@@ -2,6 +2,8 @@ package com.mountan.productList.Controller;
 
 import com.mountan.productList.DTO.CategoryDTO;
 import com.mountan.productList.DTO.ProductDTO;
+import com.mountan.productList.Exception.categoryException;
+import com.mountan.productList.Mapper.CategoryMapper;
 import com.mountan.productList.Service.CategoryService;
 import com.mountan.productList.Service.ProductService;
 import lombok.AllArgsConstructor;
@@ -21,15 +23,19 @@ public class CategoryController {
 // get all category
     @GetMapping
     public List<CategoryDTO> getAllCategory(){
-        return   categoryService.getAllCategory();
+        return
+                categoryService.getAllCategory();
     }
-
-
-
-
     @PostMapping
-    public ResponseEntity< CategoryDTO> createCategory( @Validated @RequestBody CategoryDTO categoryDTO){
-        return new ResponseEntity<>( categoryService.CreateCategory(categoryDTO), HttpStatus.CREATED);
+    public ResponseEntity< ?> createCategory( @Validated @RequestBody CategoryDTO categoryDTO){
+      //  try {
+            CategoryDTO saveCategory = categoryService.CreateCategory(categoryDTO);
+            return  ResponseEntity.status( HttpStatus.CREATED).body(saveCategory);
+            //categoryAlreadyExistsExceptions
+     ///   }catch (categoryException ex) {
+      //  return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+       // }
+       // return new ResponseEntity<>( categoryService.CreateCategory(categoryDTO), HttpStatus.CREATED);
     }
 
     // get category by id
