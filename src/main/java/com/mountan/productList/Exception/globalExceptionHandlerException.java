@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class globalExceptionHandler {
-@ExceptionHandler()
+public class globalExceptionHandlerException {
+@ExceptionHandler(categoryException.class)
     public ResponseEntity<String> globalExceptionHandler(categoryException ex){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
