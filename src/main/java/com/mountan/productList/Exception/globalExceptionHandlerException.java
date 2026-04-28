@@ -11,4 +11,9 @@ public class globalExceptionHandlerException {
     public ResponseEntity<String> globalExceptionHandler(categoryException ex){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
+
+    @ExceptionHandler(categoryNotFound.class)
+    public ResponseEntity<String> categoryNotFound(categoryNotFound ex){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
 }
