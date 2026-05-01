@@ -23,8 +23,7 @@ public class CategoryController {
 // get all category
     @GetMapping
     public List<CategoryDTO> getAllCategory(){
-        return
-                categoryService.getAllCategory();
+        return categoryService.getAllCategory();
     }
     @PostMapping
     public ResponseEntity< ?> createCategory( @Validated @RequestBody CategoryDTO categoryDTO){
