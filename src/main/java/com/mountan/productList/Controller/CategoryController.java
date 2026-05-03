@@ -6,6 +6,8 @@ import com.mountan.productList.Exception.categoryException;
 import com.mountan.productList.Mapper.CategoryMapper;
 import com.mountan.productList.Service.CategoryService;
 import com.mountan.productList.Service.ProductService;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Tag(
+        name = "Category Rest API CURD Operation",
+        description = "Create,Update, Read, Delete operation for category REST API "
+)
 @RestController
 @RequestMapping("/api/category")
 @AllArgsConstructor
@@ -25,6 +30,10 @@ public class CategoryController {
     public List<CategoryDTO> getAllCategory(){
         return categoryService.getAllCategory();
     }
+    @ApiResponse(
+            responseCode = "201",
+            description = "CREATED"
+    )
     @PostMapping
     public ResponseEntity< ?> createCategory( @Validated @RequestBody CategoryDTO categoryDTO){
       //  try {
