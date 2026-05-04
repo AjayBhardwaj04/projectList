@@ -6,11 +6,13 @@ import com.mountan.productList.Exception.categoryException;
 import com.mountan.productList.Mapper.CategoryMapper;
 import com.mountan.productList.Service.CategoryService;
 import com.mountan.productList.Service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,10 +32,17 @@ public class CategoryController {
     public List<CategoryDTO> getAllCategory(){
         return categoryService.getAllCategory();
     }
+    @Operation(
+            summary = "Create category",
+            description = "Rest API to create Category"
+
+    )
     @ApiResponse(
             responseCode = "201",
             description = "CREATED"
     )
+
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity< ?> createCategory( @Validated @RequestBody CategoryDTO categoryDTO){
       //  try {
@@ -53,7 +62,8 @@ public class CategoryController {
     }
 
 // DELETE category by id
-    @DeleteMapping("/{id}")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+@DeleteMapping("/{id}")
 public String categoryDeleteById(@PathVariable Long id){
      return categoryService.categoryDeleteById(id);
 
