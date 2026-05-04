@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/product")
 @AllArgsConstructor
+@EnableMethodSecurity(prePostEnabled = true)
 public class ProductController {
     private ProductService productService;
 
@@ -37,19 +40,23 @@ public class ProductController {
     @ApiResponse(
             responseCode = "201",
             description = "CREATED"
-    ) 
-      @PostMapping
+    )
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PostMapping
+
     public ResponseEntity<ProductDTO> createProducts(@RequestBody ProductDTO productDTO){
        ProductDTO createProduct = productService.createProduct(productDTO);
        return new ResponseEntity<>(createProduct,HttpStatus.CREATED);
     }
 // UPDATE PRODUCTS
+@PreAuthorize("hasAuthority('ROLE_SELLER')")
     @PutMapping("/{id}")
     public ProductDTO updateProducts(@PathVariable Long id ,@RequestBody ProductDTO productDTO){
        return productService.updateProduct(id,productDTO);
 
     }
     //DELETE PRODUCTS
+    @PreAuthorize("hasAuthority('ROLE_SELLER')")
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable Long id){
 
