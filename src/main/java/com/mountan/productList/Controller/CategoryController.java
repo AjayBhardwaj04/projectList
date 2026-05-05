@@ -45,14 +45,11 @@ public class CategoryController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity< ?> createCategory( @Validated @RequestBody CategoryDTO categoryDTO){
-      //  try {
+
             CategoryDTO saveCategory = categoryService.CreateCategory(categoryDTO);
             return  ResponseEntity.status( HttpStatus.CREATED).body(saveCategory);
-            //categoryAlreadyExistsExceptions
-     ///   }catch (categoryException ex) {
-      //  return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
-       // }
-       // return new ResponseEntity<>( categoryService.CreateCategory(categoryDTO), HttpStatus.CREATED);
+
+
     }
 
     // get category by id
