@@ -1,5 +1,5 @@
+POST localhost:8080/api/product
 
-GET localhost:8080/h2-console
 
 
 ###

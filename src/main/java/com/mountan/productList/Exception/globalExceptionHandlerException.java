@@ -41,17 +41,17 @@ public class globalExceptionHandlerException {
     }
 
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<exceptionResponseDTO> handelGlobalException(Exception ex, WebRequest webRequest) {
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<exceptionResponseDTO> handelGlobalException(Exception ex, WebRequest webRequest) {
+//
+//        exceptionResponseDTO exceptionResponseDTO = new exceptionResponseDTO(
+//                webRequest.getDescription(false),
+//                HttpStatus.INTERNAL_SERVER_ERROR,
+//                ex.getMessage(),
+//                LocalDateTime.now()
+//        );
 
-        exceptionResponseDTO exceptionResponseDTO = new exceptionResponseDTO(
-                webRequest.getDescription(false),
-                HttpStatus.INTERNAL_SERVER_ERROR,
-                ex.getMessage(),
-                LocalDateTime.now()
-        );
-
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exceptionResponseDTO);
-    }
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exceptionResponseDTO);
+//    }
 
 }

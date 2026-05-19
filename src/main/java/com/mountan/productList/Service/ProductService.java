@@ -3,14 +3,21 @@ package com.mountan.productList.Service;
 import com.mountan.productList.DTO.ProductDTO;
 import com.mountan.productList.Entity.Category;
 import com.mountan.productList.Entity.Product;
+
+import com.mountan.productList.Exception.categoryNotFound;
+import com.mountan.productList.Exception.productException;
 import com.mountan.productList.Mapper.ProductMapper;
 import com.mountan.productList.Repository.CategoryRepository;
 import com.mountan.productList.Repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
+
+
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+
 
 @Service
 @AllArgsConstructor
@@ -19,12 +26,36 @@ public class ProductService {
     private CategoryRepository categoryRepository;
     public ProductDTO createProduct(ProductDTO productDTO){
         // name, price, description ,categoryID
+//        Optional<Product> optional = productRepository.findById(productDTO.getCategoryID());
+//
+//
+//        if(optional.isPresent()){
+//            throw new productException("product ID this ["+ productDTO.getCategoryID()+ "]  already exists in Product");
+//        }
 
+        boolean exists = productRepository.existsByNameAndPriceAndDescriptionAndCategoryId(
+                productDTO.getName(),
+                BigDecimal.valueOf(productDTO.getPrice()),
+                productDTO.getDescription(),
+                productDTO.getCategoryID()
+        );
+
+        if (exists) {
+            throw new productException(
+                    "Product with same name : "+productDTO.getName()+ ", price : "+productDTO.getPrice()+"," +
+                            " description : "
+                            +productDTO.getDescription()+"  and PRODUCT already exists"
+            );
+        }
 
 
        Category category = categoryRepository.findById(productDTO.getCategoryID()).orElseThrow(()
-                ->new RuntimeException("Category Not find"));
+                ->new categoryNotFound("Category ID " + productDTO.getCategoryID()+" Not find"));
        //
+
+
+
+
          //DTO ->> entity chang (Dto can be not save in database) convert
         Product product =  ProductMapper.toProductEntity(productDTO,category);
          product = productRepository.save(product);

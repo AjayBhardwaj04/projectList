@@ -1,9 +1,7 @@
 package com.mountan.productList.Controller;
 
 import com.mountan.productList.DTO.CategoryDTO;
-import com.mountan.productList.DTO.ProductDTO;
-import com.mountan.productList.Exception.categoryException;
-import com.mountan.productList.Mapper.CategoryMapper;
+
 import com.mountan.productList.Service.CategoryService;
 import com.mountan.productList.Service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
